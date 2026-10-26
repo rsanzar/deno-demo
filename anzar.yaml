@@ -1,0 +1,18 @@
+apps:
+  deno-server:
+    
+    ci:
+      jobs:
+        - name: prepare-code
+          runtime: deno-latest
+          tshirt: standard
+          commands:
+            - deno -v
+            - cp server.ts /app/server.ts
+    cd:
+      runtime: deno-latest
+      tshirt: standard
+      start_commands:
+        # Deno requires the network flag to bind to port 3000
+        - deno run --allow-net /app/server.ts
+      port: 3000
